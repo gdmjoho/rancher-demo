@@ -1,5 +1,5 @@
 ## Do this manualy to create the PC secret
-Create the following file on a linux machine where you have the rancher CLI installed 
+Create a file called pc-secret.yaml the linux machine where you have the rancher CLI installed 
 
 ```yaml
 apiVersion: v1
