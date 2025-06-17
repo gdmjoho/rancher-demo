@@ -1,0 +1,30 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: demo-pvc
+  namespace: blog-demo
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nutanix-csi-demo
+  namespace: blog-demo
+spec:
+  containers:
+    - name: web-server
+      image: nginx
+      volumeMounts:
+        - name: demo-pvc
+          mountPath: /var/lib/www/html
+  volumes:
+    - name: demo-pvc
+      persistentVolumeClaim:
+        claimName: demo-pvc
+        readOnly: false
