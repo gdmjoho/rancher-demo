@@ -1,30 +1,29 @@
----
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: demo-pvc
-  namespace: blog-demo
+  name: test-app-pvc
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 10Gi
+      storage: 5Gi
+  storageClassName: default-nutanix-storageclass
 ---
 apiVersion: v1
 kind: Pod
 metadata:
-  name: nutanix-csi-demo
-  namespace: blog-demo
+  name: test-app
 spec:
   containers:
-    - name: web-server
-      image: nginx
+    - name: test-container
+      image: nginx:latest
+      ports:
+        - containerPort: 80
       volumeMounts:
-        - name: demo-pvc
-          mountPath: /var/lib/www/html
+        - mountPath: "/usr/share/nginx/html"
+          name: test-volume
   volumes:
-    - name: demo-pvc
+    - name: test-volume
       persistentVolumeClaim:
-        claimName: demo-pvc
-        readOnly: false
+        claimName: test-app-pvc
