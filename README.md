@@ -1,2 +1,2 @@
 # rancher-demo
-rancher-demo repo for things
+Repository for demo, for blogpost on how to use Rancher Fleet Continuous delivery
