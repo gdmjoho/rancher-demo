@@ -1,0 +1,10 @@
+defaultNamespace: ntnx-system
+helm:
+  releaseName: nutanix-csi-storage
+  chart: https://github.com/nutanix/helm-releases/releases/download/nutanix-csi-storage-3.3.0/nutanix-csi-storage-3.3.0.tgz
+  takeOwnership: true
+  values:
+    createSecret: false
+    createPrismCentralSecret: false
+    pcSecretName: ntnx-pc-secret
+    csiCategoryConfigmapNamespace: ntnx-system
