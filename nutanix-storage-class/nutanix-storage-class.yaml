@@ -1,0 +1,15 @@
+allowVolumeExpansion: true
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+  name: default-nutanix-storageclass
+parameters:
+  csi.storage.k8s.io/fstype: xfs
+  hypervisorAttached: ENABLED
+  storageContainer: nxcluster-cnt01
+  storageType: NutanixVolumes
+provisioner: csi.nutanix.com
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer

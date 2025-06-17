@@ -1,0 +1,9 @@
+kustomize:
+  dir: .
+
+helm:
+  takeOwnership: true
+  force: true
+
+dependsOn:
+  - name: gdm-rancher-fleet-nutanix-csi-nutanix-csi-nutanix-csi
