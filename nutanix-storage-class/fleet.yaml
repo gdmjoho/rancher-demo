@@ -6,4 +6,4 @@ helm:
   force: true
 
 dependsOn:
-  - name: gdm-rancher-fleet-nutanix-csi-nutanix-csi-nutanix-csi
+  - name: blog-demo-nutanix-csi
