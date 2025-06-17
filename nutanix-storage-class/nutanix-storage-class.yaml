@@ -8,7 +8,7 @@ metadata:
 parameters:
   csi.storage.k8s.io/fstype: xfs
   hypervisorAttached: ENABLED
-  storageContainer: nxcluster-cnt01
+  storageContainer: nxtest-cnt01
   storageType: NutanixVolumes
 provisioner: csi.nutanix.com
 reclaimPolicy: Delete
