@@ -6,4 +6,4 @@ helm:
   force: true
 
 dependsOn:
-  - name: gdm-rke2-test-gdm-rke2-test-cloudnative-pg
+  - name: blog-demo-cloudnative-pg
