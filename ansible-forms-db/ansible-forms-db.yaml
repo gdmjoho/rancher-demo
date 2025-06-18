@@ -1,0 +1,29 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: forms
+---
+apiVersion: k8s.mariadb.com/v1alpha1
+kind: MariaDB
+metadata:
+  name: forms-mariadb
+  namespace: forms
+spec:
+  replicas: 1
+  image: docker-registry1.mariadb.com/library/mariadb:11.4.5
+  imagePullPolicy: IfNotPresent
+  port: 3306
+  storage:
+    size: 50Gi
+    storageClassName: default-nutanix-storageclass
+  myCnf: |
+    [mariadb]
+    bind-address=0.0.0.0
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 300m
+      memory: 512Mi

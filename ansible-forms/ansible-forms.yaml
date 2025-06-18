@@ -1,0 +1,97 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: forms
+  namespace: forms
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: forms
+  template:
+    metadata:
+      labels:
+        app: forms
+    spec:
+      containers:
+        - name: forms
+          image: ansibleguy/ansibleforms:latest
+          imagePullPolicy: "IfNotPresent"
+          env:
+            - name: DB_HOST
+              value: forms-mariadb.forms
+            - name: DB_PORT
+              value: "3306"
+            - name: DB_USER
+              value: root
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: forms-mariadb-root
+                  key: password
+            - name: BASE_URL
+              value: "/"
+          ports:
+            - containerPort: 8000
+              name: forms
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /app/dist/persistent
+              name: formsdata
+      volumes:
+        - name: formsdata
+          persistentVolumeClaim:
+            claimName: formsdata-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: forms
+  namespace: forms
+spec:
+  ports:
+    - port: 8000
+      protocol: TCP
+      targetPort: forms
+  selector:
+    app: forms
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: forms
+  name: formsdata-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10G
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ansibleforms-ingress
+  namespace: forms
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+      - forms-demo.domain.com
+      secretName: forms-tls
+  rules:
+  - host: forms-demo.domain.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: forms
+            port:
+              number: 8000
