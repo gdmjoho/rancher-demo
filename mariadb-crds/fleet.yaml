@@ -1,0 +1,6 @@
+defaultNamespace: mariadb
+helm:
+  releaseName: mariadb-operator-crds
+  repo: https://mariadb-operator.github.io/mariadb-operator
+  chart: mariadb-operator-crds
+  version: 0.38.1
