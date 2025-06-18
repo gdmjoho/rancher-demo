@@ -1,0 +1,7 @@
+defaultNamespace: awx
+helm:
+  resources: 
+  - awx-ingress.yaml
+  takeOwnership: true
+dependsOn:
+  - name: blog-demo-awx

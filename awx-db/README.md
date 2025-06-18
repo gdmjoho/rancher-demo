@@ -11,6 +11,6 @@ rancher kubectl -n awx delete awx awx
 
 Create tls secret
 ```bash
-rancher kubectl -n awx-int create secret tls awx-tls-secret --cert=awx-demo.app.gdm.se.pem --key=awx-demo.app.gdm.se.key
+rancher kubectl -n awx-int create secret tls awx-tls-secret --cert=awx-demo.domain.com.pem --key=awx-demo.domain.com.key
 ```
 
