@@ -1,0 +1,9 @@
+---
+defaultNamespace: awx-int
+
+helm:
+  takeOwnership: true
+  force: true
+
+dependsOn:
+  - name: gdm-rke2-test-gdm-rke2-test-cloudnative-pg

@@ -1,0 +1,15 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: awx-postgres
+  namespace: awx
+spec:
+  imageName: ghcr.io/cloudnative-pg/postgresql:16.8
+  instances: 2
+  bootstrap:
+    initdb:
+      database: awx
+      owner: awx
+  storage:
+    size: 50Gi
