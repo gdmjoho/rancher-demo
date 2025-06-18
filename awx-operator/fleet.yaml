@@ -1,0 +1,11 @@
+defaultNamespace: awx
+helm:
+  takeOwnership: true
+  releaseName: awx-operator
+  repo: https://ansible-community.github.io/awx-operator-helm
+  chart: awx-operator
+  version: 3.1.0
+  values:
+    operator:
+      image:
+        tag: 3.1.0
