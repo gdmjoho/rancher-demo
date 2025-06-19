@@ -11,7 +11,7 @@ rancher kubectl -n forms get pods
 rancher kubectl -n forms delete pods forms-5dbdfcbfb5-xxx
 ```
 
-Skapa tls secret
+create tls secret
 ```bash
 rancher kubectl -n forms create secret tls forms-tls --cert=forms-demo.domain.com.pem --key=forms-demo.domain.com.key
 ```
